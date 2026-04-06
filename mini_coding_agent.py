@@ -407,6 +407,9 @@ class MiniAgent:
         recent_start = max(0, len(history) - 6)
         for index, item in enumerate(history):
             recent = index >= recent_start
+            if item["role"] == "tool" and item["name"] in ("write_file", "patch_file"):
+                path = str(item["args"].get("path", ""))
+                seen_reads.discard(path)
             if item["role"] == "tool" and item["name"] == "read_file" and not recent:
                 path = str(item["args"].get("path", ""))
                 if path in seen_reads:
